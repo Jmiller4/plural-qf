@@ -150,7 +150,10 @@ if len(sys.argv) == 5:
 
 
     if sys.argv[1] == 'pm':
-        M_val = int(sys.argv[4])
+        try:
+            M_val = int(sys.argv[4])
+        except ValueError:
+            usage_info()
         print(pairwise_matching(groups, contributions, M=M_val))
         exit()
 
