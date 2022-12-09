@@ -96,7 +96,9 @@ def offset_match(groups, contributions, add_singletons = True):
 
 
 def pairwise_matching(groups, contributions, M=100):
-        
+    # groups: a 2d array. groups[i] is a list of people in group i (assume every person has an index).
+    # contributions: an array. contributions[i] is the amount agent i contributed to a project.
+   
     agents = list(range(len(contributions)))
 
     if any(contributions[i] < 0 for i in agents):
@@ -107,8 +109,9 @@ def pairwise_matching(groups, contributions, M=100):
     return sum(contributions) + sum(k[p[0]][p[1]] * math.sqrt(contributions[p[0]] * contributions[p[1]]) for p in combinations(agents,2))
 
 
-fn_dict = {'vcm' : vanilla_cluster_match, 'scm' : squared_cluster_match, 'cocm': connection_oriented_cluster_match, 'om': offset_match, 'pm': pairwise_matching}
+# Code for parsing input and running these functions from the command line:
 
+fn_dict = {'vcm' : vanilla_cluster_match, 'scm' : squared_cluster_match, 'cocm': connection_oriented_cluster_match, 'om': offset_match, 'pm': pairwise_matching}
 
 def usage_info():
     # print out usage info
